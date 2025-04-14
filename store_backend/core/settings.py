@@ -216,3 +216,9 @@ cloudinary.config(
 
 )
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+
+ALLOWED_HOSTS = [
+    'alhomsanibackend-production.up.railway.app',
+    '.railway.app',  # Allows all Railway subdomains
+    'localhost',     # For local testing
+]
