@@ -1,0 +1,685 @@
+openapi: 3.0.3
+info:
+  title: Django DRF Alhomsani
+  version: 0.0.0
+paths:
+  /api/:
+    get:
+      operationId: api_list
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+          description: ''
+    post:
+      operationId: api_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Product'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+  /api/{id}/:
+    get:
+      operationId: api_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+    delete:
+      operationId: api_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/filtered/:
+    get:
+      operationId: api_filtered_list
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+          description: ''
+  /profiles/:
+    get:
+      operationId: profiles_retrieve
+      tags:
+      - profiles
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: ''
+    put:
+      operationId: profiles_update
+      tags:
+      - profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Profile'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Profile'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Profile'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: ''
+    patch:
+      operationId: profiles_partial_update
+      tags:
+      - profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProfile'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProfile'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProfile'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: ''
+  /profiles/activity/:
+    get:
+      operationId: profiles_activity_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - profiles
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedActivityLogList'
+          description: ''
+  /profiles/bookmarks/add/{product_id}/:
+    put:
+      operationId: profiles_bookmarks_add_update
+      parameters:
+      - in: path
+        name: product_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DummyFavorite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DummyFavorite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DummyFavorite'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DummyFavorite'
+          description: ''
+    patch:
+      operationId: profiles_bookmarks_add_partial_update
+      parameters:
+      - in: path
+        name: product_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDummyFavorite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDummyFavorite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDummyFavorite'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DummyFavorite'
+          description: ''
+  /profiles/bookmarks/remove/{product_id}/:
+    put:
+      operationId: profiles_bookmarks_remove_update
+      parameters:
+      - in: path
+        name: product_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DummyFavorite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DummyFavorite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DummyFavorite'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DummyFavorite'
+          description: ''
+    patch:
+      operationId: profiles_bookmarks_remove_partial_update
+      parameters:
+      - in: path
+        name: product_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDummyFavorite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDummyFavorite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDummyFavorite'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DummyFavorite'
+          description: ''
+  /profiles/favorites/add/{product_id}/:
+    put:
+      operationId: profiles_favorites_add_update
+      parameters:
+      - in: path
+        name: product_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DummyFavorite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DummyFavorite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DummyFavorite'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DummyFavorite'
+          description: ''
+    patch:
+      operationId: profiles_favorites_add_partial_update
+      parameters:
+      - in: path
+        name: product_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDummyFavorite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDummyFavorite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDummyFavorite'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DummyFavorite'
+          description: ''
+  /profiles/favorites/remove/{product_id}/:
+    put:
+      operationId: profiles_favorites_remove_update
+      parameters:
+      - in: path
+        name: product_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DummyFavorite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DummyFavorite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DummyFavorite'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DummyFavorite'
+          description: ''
+    patch:
+      operationId: profiles_favorites_remove_partial_update
+      parameters:
+      - in: path
+        name: product_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDummyFavorite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDummyFavorite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDummyFavorite'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DummyFavorite'
+          description: ''
+components:
+  schemas:
+    ActionEnum:
+      enum:
+      - purchase
+      - bookmark
+      - favorite
+      type: string
+      description: |-
+        * `purchase` - Purchase
+        * `bookmark` - Bookmark
+        * `favorite` - Favorite
+    ActivityLog:
+      type: object
+      description: Serializer for activity log entries.
+      properties:
+        profile:
+          type: integer
+        product:
+          type: integer
+          readOnly: true
+        action:
+          $ref: '#/components/schemas/ActionEnum'
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - action
+      - product
+      - profile
+      - timestamp
+    AvailabilityEnum:
+      enum:
+      - in_stock
+      - out_of_stock
+      type: string
+      description: |-
+        * `in_stock` - In Stock
+        * `out_of_stock` - Out of Stock
+    CarTypeEnum:
+      enum:
+      - classic
+      - electrical
+      - luxury
+      type: string
+      description: |-
+        * `classic` - Classic
+        * `electrical` - Electrical
+        * `luxury` - Luxury
+    DummyFavorite:
+      type: object
+      properties:
+        car_id:
+          type: integer
+      required:
+      - car_id
+    PaginatedActivityLogList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityLog'
+    PatchedDummyFavorite:
+      type: object
+      properties:
+        car_id:
+          type: integer
+    PatchedProfile:
+      type: object
+      description: Serializer for the user profile, including favorites, bookmarks,
+        and activity log.
+      properties:
+        user:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        location:
+          type: string
+          nullable: true
+          maxLength: 100
+        contact_info:
+          type: string
+          nullable: true
+          maxLength: 255
+        bio:
+          type: string
+          nullable: true
+        profile_picture:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 200
+        favorite_cars:
+          type: array
+          items:
+            type: integer
+        bookmarked_cars:
+          type: array
+          items:
+            type: integer
+        activity_log:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityLog'
+          readOnly: true
+        member_since:
+          type: string
+          format: date-time
+          readOnly: true
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        category:
+          type: integer
+        name:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+          nullable: true
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        stock_quantity:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        sku:
+          type: string
+          maxLength: 100
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        availability:
+          $ref: '#/components/schemas/AvailabilityEnum'
+        car_type:
+          $ref: '#/components/schemas/CarTypeEnum'
+        images:
+          type: string
+          format: uri
+          maxLength: 200
+      required:
+      - id
+      - images
+      - name
+      - price
+      - sku
+      - updated_at
+    Profile:
+      type: object
+      description: Serializer for the user profile, including favorites, bookmarks,
+        and activity log.
+      properties:
+        user:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        location:
+          type: string
+          nullable: true
+          maxLength: 100
+        contact_info:
+          type: string
+          nullable: true
+          maxLength: 255
+        bio:
+          type: string
+          nullable: true
+        profile_picture:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 200
+        favorite_cars:
+          type: array
+          items:
+            type: integer
+        bookmarked_cars:
+          type: array
+          items:
+            type: integer
+        activity_log:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityLog'
+          readOnly: true
+        member_since:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - activity_log
+      - member_since
+      - name
+      - user
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
