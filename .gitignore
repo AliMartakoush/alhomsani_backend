@@ -8,9 +8,8 @@ shared.env
 create_project.sh
 setup.sh
 store_frontend/.env
-store_frontend/dist/
 store_backend/.env
-
+store_backend/requirements.txt
 # Python/Django
 __pycache__/
 *.py[cod]
@@ -55,7 +54,6 @@ ENV/
 env.bak/
 venv.bak/
 store_backend/venv/
-store_backend/myenv/
 
 # Node/React
 node_modules/
@@ -81,8 +79,6 @@ coverage/
 
 # IDE - VSCode
 .vscode/*
-store_frontend/.vscode/*
-store_backend/.vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
