@@ -37,7 +37,6 @@ psycopg2==2.9.9
 psycopg2-binary==2.9.9
 pyasn1==0.6.1
 pycparser==2.22
-pygraphviz==1.14
 PyJWT==2.9.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.1.0
