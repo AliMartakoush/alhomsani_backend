@@ -54,3 +54,5 @@ stripe==12.0.0
 typing_extensions==4.12.2
 uritemplate==4.1.1
 urllib3==2.2.3
+gunicorn==21.2.0
+
