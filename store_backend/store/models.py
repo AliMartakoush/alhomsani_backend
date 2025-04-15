@@ -35,7 +35,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock_quantity = models.IntegerField(default=0)
     key_features = ArrayField(
-        models.CharField(max_length=200),
+        models.CharField(max_length=200,default='N/A'),
         blank=True,
         default=list,
         help_text="A list of key features (e.g., 'Turbo engine', 'Leather seats')"
