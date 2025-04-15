@@ -148,6 +148,9 @@ class CreateReviewView(generics.CreateAPIView):
             car=car
         )
 
-
+class OtherUserReview(generics.RetrieveAPIView):
+    queryset=Profile.objects.all()
+    serializer_class = ProfileSerializer
+    
 
 
