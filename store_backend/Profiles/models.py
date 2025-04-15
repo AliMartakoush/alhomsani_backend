@@ -29,7 +29,10 @@ class Profile(models.Model):
     bookmarked_cars = models.ManyToManyField(Product, related_name='bookmarked_by', blank=True)
     
     def __str__(self):
-        return self.user.username
+        if self.name:
+            return self.name
+        else:
+            return self.user.username
 
 class ActivityLog(models.Model):
     ACTION_CHOICES = [
