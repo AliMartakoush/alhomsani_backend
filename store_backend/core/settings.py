@@ -225,3 +225,13 @@ ALLOWED_HOSTS = [
     '.railway.app',  # Allows all Railway subdomains
     'localhost',     # For local testing
 ]
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": os.getenv("REDIS_PUBLIC_URL"),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PASSWORD": os.getenv("REDIS_PASSWORD"),
+        }
+    }
+}

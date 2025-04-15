@@ -55,4 +55,4 @@ typing_extensions==4.12.2
 uritemplate==4.1.1
 urllib3==2.2.3
 gunicorn==21.2.0
-
+django-redis==5.4.0
