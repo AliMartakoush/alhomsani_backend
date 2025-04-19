@@ -138,11 +138,12 @@ class ReviewSerializer(serializers.ModelSerializer):
     reviewer = serializers.StringRelatedField()  # Shows reviewer's __str__ representation
     # If you want to show specific profile fields instead:
     # reviewer_username = serializers.CharField(source='reviewer.user.username', read_only=True)
+    reviewer_id=serializers.IntegerField(source='reviewer.id',read_only=True)
     reviewer_Profile_pic=serializers.CharField(source='reviewer.profile_picture_url',read_only=True)
     class Meta:
         model = Reviews
-        fields = ['id', 'reviewer', 'car', 'review', 'time_written','reviewer_Profile_pic']
-        read_only_fields = ['reviewer', 'time_written']
+        fields = ['id', 'reviewer', 'car', 'review', 'time_written','reviewer_Profile_pic','reviewer_id']
+        read_only_fields = ['reviewer', 'time_written','reviewer_id']
     
 class CreateReviewSerializer(serializers.ModelSerializer):
     class Meta:
